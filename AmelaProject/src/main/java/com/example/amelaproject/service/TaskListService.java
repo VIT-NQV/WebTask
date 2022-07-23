@@ -1,19 +1,15 @@
 package com.example.amelaproject.service;
 
-import com.example.amelaproject.taskList.TaskList;
-import com.example.amelaproject.taskList.TaskListRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.example.amelaproject.entity.TaskListEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 
 import java.util.List;
 
-@Service
-public class TaskListService {
+public interface TaskListService {
 
-    @Autowired
-    private TaskListRepository repo;
+    List<TaskListEntity> findAll();
 
-    public List<TaskList> listAll() {
-        return (List<TaskList>) repo.findAll();
-    }
+    Page<TaskListEntity> findAll(PageRequest pageable);
 }
