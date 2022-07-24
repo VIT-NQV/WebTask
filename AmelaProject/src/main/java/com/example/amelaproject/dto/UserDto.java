@@ -1,10 +1,14 @@
 package com.example.amelaproject.dto;
 
-public class SignUp {
+import lombok.Data;
+
+@Data
+public class UserDto {
 
     private String name;
 
     private String username;
 
     private String password;
+
 }
