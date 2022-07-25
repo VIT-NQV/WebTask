@@ -4,7 +4,7 @@ import com.example.amelaproject.entity.UserEntity;
 
 public interface UserService {
 
-    UserEntity saveSignUp(UserEntity user);
+    UserEntity AddUser(UserEntity user);
 
     Boolean check(UserEntity user);
 }

@@ -3,7 +3,6 @@ package com.example.amelaproject.service.impl;
 import com.example.amelaproject.entity.UserEntity;
 import com.example.amelaproject.repository.UserRepository;
 import com.example.amelaproject.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public class UserImpl implements UserService {
     private UserRepository userRepo;
 
     @Override
-    public UserEntity saveSignUp(UserEntity user){
+    public UserEntity AddUser(UserEntity user){
         return userRepo.save(user);
     }
 

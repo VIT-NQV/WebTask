@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1>Sign Up</h1>
-        <form th:action="@{/save_signup}" th:object="${signup}" method="post">
+        <form th:action="@{/save_signup}" th:object="${user}" method="post">
             <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" name="name">

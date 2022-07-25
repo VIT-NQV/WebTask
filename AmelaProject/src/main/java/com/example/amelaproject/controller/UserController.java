@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping("/save_signup")
-    public String saveSignUp(@ModelAttribute UserEntity user) {
-        userimpl.saveSignUp(user);
+    public String addUsers(@ModelAttribute UserEntity user) {
+        userimpl.AddUser(user);
         return "login";
     }
 
@@ -32,11 +32,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String check(@ModelAttribute UserEntity user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            if (userimpl.check(user) == true) {
-                return "taskListIndex";
-            }
+    public String check(@ModelAttribute UserEntity user) {
+        if (userimpl.check(user) == true) {
+            return "taskListIndex";
         }
         return "login";
     }
