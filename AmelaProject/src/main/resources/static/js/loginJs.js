@@ -53,7 +53,7 @@ validator.namelength = function (selector) {
     return {
         selector: selector,
         test: function (value) {
-            return value.length >= 3 && value.length <= 256 ? undefined : 'Yeu cau nhap 3-256 ky tu'
+            return value.length >= 3 || value.length <= 256 ? undefined : 'Yeu cau nhap 3-256 ky tu'
         }
     }
 }
@@ -62,7 +62,7 @@ validator.passwordlength = function (selector) {
     return {
         selector: selector,
         test: function (value) {
-            return value.length >= 8 && value.length <= 256 ? undefined : 'Yeu cau nhap 3-256 ky tu'
+            return value.length >= 8 || value.length <= 256 ? undefined : 'Yeu cau nhap 3-256 ky tu'
         }
     }
 }

@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script type="text/javascript" src="js/loginJs.js"></script>
+    <script type="text/javascript" src="js/loginJsTest.js"></script>
 
 </head>
 <body>
@@ -15,12 +15,12 @@
 
         <h1>Login</h1>
 
-        <form th:action="@{/login}" method="post" th:object="${user}" id="form">
+        <form th:action="@{/login}" method="post" th:object="${user}" id="form" onsubmit="return valiDate()">
 
             <div class="mb-3 form-input">
                 <label for="username" class="form-label">Username</label>
                 <input id="username" name="username" type="text" class="form-control" >
-                <span class="form-message"></span>
+                <span class="form-message" id="messageU"></span>
             </div>
 
             <div class="mb-3 form-input">
@@ -31,20 +31,10 @@
 
             <button type="submit">Login</button>
 
-            <p class="error"></p>
+        </form>
+        <form th:action="@{/signup}">
+            <button type="submit">Sign Up</button>
         </form>
     </div>
-
-    <script>
-        validator({
-           form: 'form',
-            rules: [
-                validator.isRequired('#username'),
-                validator.isRequired('#password'),
-                validator.namelength('username'),
-                validator.passwordlength('password'),
-            ]
-        });
-    </script>
 </body>
 </html>

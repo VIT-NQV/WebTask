@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/login")
     public String check(@ModelAttribute UserEntity user) {
         if (userimpl.check(user) == true) {
-            return "taskListIndex";
+            return "redirect:/tasklist/page";
         }
         return "login";
     }
