@@ -24,4 +24,14 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    public UserEntity() {
+
+    }
+
+    public UserEntity(Long loginID, String name, String username, String password) {
+        this.loginID = loginID;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+    }
 }
