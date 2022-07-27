@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Sign Up</h1>
+    <form th:action="@{/save}" th:object="${userValidate}"  method="post" onsubmit="">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" type="text" class="form-control" name="name">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input id="address" type="text" class="form-control">
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input id="phone" type="number" class="form-control">
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+        </div>
+
+        <button type="submit">Create</button>
+
+    </form>
+</body>
+</html>

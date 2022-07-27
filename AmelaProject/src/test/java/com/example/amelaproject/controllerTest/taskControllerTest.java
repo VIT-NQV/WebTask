@@ -6,7 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
+//import static org.springframework.jupiter.api.Assertions.*;
+
+@SpringBootTest
 public class taskControllerTest {
 
     @Mock
@@ -20,4 +25,5 @@ public class taskControllerTest {
     public void setUp() {
 //        MockitoAnnotations.openMocks(this);
     }
+
 }
