@@ -1,5 +1,6 @@
 package com.example.amelaproject.controller;
 
+import com.example.amelaproject.entity.UserEntity;
 import com.example.amelaproject.entity.UserValidateEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,8 @@ import javax.validation.Valid;
 public class UserValidateController {
 
     @GetMapping("/validate")
-    public String showValidate () {
+    public String showValidate (Model model) {
+        model.addAttribute("userValidate", new UserValidateEntity());
         return "userValidate";
     }
 

@@ -13,7 +13,18 @@
         input {
             width: 300px !important;
         }
+
+        .pageBtn{
+            width: 3rem;
+            border-radius: 7px;
+        }
+
+        .example{
+            text-align: right;
+        }
     </style>
+
+
 </head>
 <body>
     <div class="container">
@@ -44,37 +55,39 @@
 
         <table class="table">
             <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Tiêu đề</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Action</th>
-            </tr>
+                <tr class="text-center">
+                    <th  scope="col">ID</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Action</th>
+                </tr>
             </thead>
-            <tbody>
-            <tr th:each="listtask : ${show}">
-                <td th:text="${listtask.listID}"></td>
-                <td th:text="${listtask.title}"></td>
-                <td th:text="${listtask.status}"></td>
-                <td>
-                    <a href="#" class="btn btn-primary">Chỉnh sửa</a>
-                    <a href="#" class="btn btn-primary">Chi tiết</a>
-                    <a href="#" class="btn btn-danger">Xoá</a>
-                </td>
-            </tr>
+            <tbody th:each="listtask : ${show}">
+                <tr class="text-center">
+                    <th scope="row" th:text="${listtask.listID}"></th>
+                    <td th:text="${listtask.title}"></td>
+                    <td th:text="${listtask.status}"></td>
+                    <td>
+                        <a href="#" class="btn btn-primary">Chỉnh sửa</a>
+                        <a href="#" class="btn btn-primary">Chi tiết</a>
+                        <a href="#" class="btn btn-danger">Xoá</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
+        <hr>
+        <div class="example">
+            <nav aria-label="Page navigation">
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <a class="btn btn-secondary pageBtn" th:if="${currentPage != i}" th:href="@{'/tasklist/page/' + ${i}}">[[${i}]]</a>
+            <span class="btn btn-primary pageBtn" th:unless="${currentPage != i}">[[${i}]]</span>
+            &nbsp;
+        </span>
+            </nav>
+        </div>
     </div>
 
-    <hr>
-    <nav aria-label="Page navigation example" >
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="/tasklist/page">1</a></li>
-            <li class="page-item"><a class="page-link" href="/tasklist/page?p=1">2</a></li>
-            <li class="page-item"><a class="page-link" href="/tasklist/page?p=2">3</a></li>
-            <li class="page-item"><a class="page-link" href="/tasklist/page?p=3">4</a></li>
-            <li class="page-item"><a class="page-link" href="/tasklist/page?p=4">5</a></li>
-        </ul>
-    </nav>
+
+
 </body>
 </html>

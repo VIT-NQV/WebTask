@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -22,16 +23,21 @@ public class TaskListController {
 
     @GetMapping("/tasklist")
     public String showTask(Model model) {
-        List<TaskListEntity> task = taskListService.findAll();
-        model.addAttribute("show",task);
-        return "taskListIndex";
+
+        return pagination(model, 1);
     }
 
-    @GetMapping("tasklist/page")
-    public String pagination(Model model, @RequestParam("p")Optional<Integer> p){
-        Pageable pageable = PageRequest.of(p.orElse(0),5);
-        Page<TaskListEntity> page = taskListService.findAll((PageRequest) pageable);
-        model.addAttribute("show", page);
+    @GetMapping("/tasklist/page/{page}")
+    public String pagination(Model model, @PathVariable("page") int  page){
+        Page<TaskListEntity> pageList = taskListService.findAll(page);
+
+        long totalPage = pageList.getTotalPages();
+        List<TaskListEntity> listTask = pageList.getContent();
+
+        model.addAttribute("show", listTask);
+        model.addAttribute("totalPages" , totalPage);
+        model.addAttribute("currentPage" , page);
+
         return "taskListIndex";
     }
 

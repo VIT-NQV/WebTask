@@ -6,6 +6,7 @@ import com.example.amelaproject.service.TaskListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +19,13 @@ public class TaskListImpl implements TaskListService {
 
     @Override
     public List<TaskListEntity> findAll() {
-        return taskList.findAll();
+        List<TaskListEntity> listTask = (List<TaskListEntity> ) taskList.findAll();
+        return listTask;
     }
 
     @Override
-    public Page<TaskListEntity> findAll(PageRequest pageable) {
+    public Page<TaskListEntity> findAll(int page ) {
+        Pageable pageable = PageRequest.of(page - 1, 5   );
         return taskList.findAll(pageable);
     }
 }

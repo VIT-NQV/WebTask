@@ -1,5 +1,6 @@
 package com.example.amelaproject.entity;
 
+import com.example.amelaproject.CustomValidate.implValidation.PhoneNumber;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,10 +22,10 @@ public class UserValidateEntity {
     @NotBlank(message = "name not empty")
     private String name;
 
-    @NotBlank(message = "name not empty")
+    @NotBlank(message = "address not empty")
     private String address;
 
-    @NotBlank(message = "name not empty")
+    @PhoneNumber
     private String phone;
 
 

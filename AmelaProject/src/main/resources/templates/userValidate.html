@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .disable{
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <h1>Sign Up</h1>
-    <form th:action="@{/save}" th:object="${userValidate}"  method="post" onsubmit="">
+    <form th:action="@{/save}" th:object="${userValidate}"  method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input id="name" type="text" class="form-control" name="name">
+            <input id="name" type="text" class="form-control" th:field="*{name}">
             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Address</label>
-            <input id="address" type="text" class="form-control">
-            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+            <input id="address" type="text" class="form-control" th:field="*{address}">
+            <div th:class="${ userValidate.address ==  null  ? (userValidate.address == null && userValidate.name == null ? 'disable' : '') : ''}">
+                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+            </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Phone</label>
-            <input id="phone" type="number" class="form-control">
-            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+            <input id="phone" type="text" class="form-control" th:field="*{phone}">
+            <div th:class="${ userValidate.phone ==  null   ? (userValidate.address == null && userValidate.phone == null ? 'disable': '') : ''}">
+                <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+            </div>
         </div>
 
         <button type="submit">Create</button>

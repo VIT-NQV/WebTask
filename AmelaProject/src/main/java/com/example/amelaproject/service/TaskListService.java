@@ -10,5 +10,7 @@ public interface TaskListService {
 
     List<TaskListEntity> findAll();
 
-    Page<TaskListEntity> findAll(PageRequest pageable);
+    Page<TaskListEntity> findAll(int page);
+
+
 }
