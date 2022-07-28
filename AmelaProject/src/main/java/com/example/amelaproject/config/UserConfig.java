@@ -1,11 +1,10 @@
 package com.example.amelaproject.config;
 
-import com.example.amelaproject.service.CustomUserDeatilService;
+import com.example.amelaproject.service.CustomUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,7 +22,7 @@ public class UserConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new CustomUserDeatilService();
+        return new CustomUserDetailService();
     }
 
     @Bean
@@ -42,16 +41,27 @@ public class UserConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
+//        httpSecurity.authorizeRequests()
+//                .antMatchers("/tasklist").authenticated()
+//                .anyRequest().permitAll()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/tasklist/page/{page}",true)
+//                .permitAll();
+
         httpSecurity.authorizeRequests()
-                .antMatchers("/tasklist").authenticated()
+                .antMatchers("/tasklist/**").authenticated()
                 .anyRequest().permitAll()
-                .and()
-                .formLogin()
+                .and().formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/tasklist/page/{page}",true)
-                .permitAll();
+                .defaultSuccessUrl("/tasklist")
+                .failureUrl("/login?error=true")
+                .permitAll().and().csrf().disable()
+                .logout().logoutSuccessUrl("/login?logout=true");
 
     }
 

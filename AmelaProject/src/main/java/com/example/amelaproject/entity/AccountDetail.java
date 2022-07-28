@@ -1,15 +1,15 @@
-package com.example.amelaproject.service.impl;
+package com.example.amelaproject.entity;
 
-import com.example.amelaproject.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserDetailImpl implements UserDetails {
+public class AccountDetail implements UserDetails {
 
     private UserEntity userEntity;
-    public UserDetailImpl(UserEntity userEntity){
+
+    public AccountDetail(UserEntity userEntity){
         this.userEntity = userEntity;
     }
 
@@ -33,6 +33,10 @@ public class UserDetailImpl implements UserDetails {
         return true;
     }
 
+    public boolean hasRole(String roleName) {
+        return true;
+    }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
@@ -45,6 +49,6 @@ public class UserDetailImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true ;
     }
 }
