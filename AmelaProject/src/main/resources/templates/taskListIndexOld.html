@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Task List</title>
-    <link rel="stylesheet" href="css/taskListIndex.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        a {
+            height: 40px;
+            width: 100px;
+        }
+
+        input {
+            width: 300px !important;
+        }
+
+        .pageBtn{
+            width: 3rem;
+            border-radius: 7px;
+        }
+
+        .example{
+            text-align: right;
+        }
+    </style>
+
+
 </head>
 <body>
-    <div id="wrapper">
-        <h1>Task List</h1>
+    <div class="container">
+        <h1 style="text-align: center">Task List</h1>
 
         <div class="row align-items-start">
             <div class="col">
@@ -33,18 +53,20 @@
             </div>
         </div>
 
-        <table id="keywords" cellspacing="0" cellpadding="0">
+        <br>
+
+        <table class="table">
             <thead>
-                <tr>
-                    <th><span>ID</span></th>
-                    <th><span>Tiêu đề</span></th>
-                    <th><span>Trạng thái</span></th>
-                    <th><span>Action</span></th>
+                <tr class="text-center">
+                    <th  scope="col">ID</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody th:each="listtask : ${show}">
-                <tr>
-                    <th class="lalign" th:text="${listtask.listID}">silly tshirts</th>
+                <tr class="text-center">
+                    <th scope="row" th:text="${listtask.listID}"></th>
                     <td th:text="${listtask.title}"></td>
                     <td th:text="${listtask.status}"></td>
                     <td>
@@ -55,6 +77,9 @@
                 </tr>
             </tbody>
         </table>
+
+        <hr>
+
         <div class="example">
             <nav aria-label="Page navigation">
                 <span th:each="i: ${#numbers.sequence(1, totalPages)}">
@@ -64,5 +89,6 @@
             </nav>
         </div>
     </div>
+
 </body>
 </html>

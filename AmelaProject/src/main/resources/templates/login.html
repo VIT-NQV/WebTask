@@ -3,38 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <script type="text/javascript" src="js/loginJsTest.js"></script>
-
+    <link rel="stylesheet" href="css/loginCss.css">
+    <script type="text/javascript" src="js/loginJs.js"></script>
 </head>
 <body>
+    <div class="login-page">
+        <div class="form">
+            <h2>Login</h2>
+            <form class="login-form" th:action="@{/login}" method="post" th:object="${user}" id="form" onsubmit="return valiDate()">
 
-    <div class="container">
+                <input id="username" name="username" type="text" placeholder="username"/>
+<!--                <span class="form-message" id="messageU"></span>-->
 
-        <h1>Login</h1>
+                <input id="password" name="password" type="password" placeholder="password"/>
+<!--                <span class="form-message"></span>-->
 
-        <form th:action="@{/login}" method="post" th:object="${user}" id="form" onsubmit="return valiDate()">
-
-            <div class="mb-3 form-input">
-                <label for="username" class="form-label">Username</label>
-                <input id="username" name="username" type="text" class="form-control" >
-                <span class="form-message" id="messageU"></span>
-            </div>
-
-            <div class="mb-3 form-input">
-                <label for="password" class="form-label">Password</label>
-                <input id="password" name="password" type="password" class="form-control" >
-                <span class="form-message"></span>
-            </div>
-
-            <button type="submit">Login</button>
-
-        </form>
-        <form th:action="@{/signup}">
-            <button type="submit">Sign Up</button>
-        </form>
+                <button type="submit">login</button>
+                <p class="message">Not registered? <a href="http://localhost:8080/signup">Create an account</a></p>
+            </form>
+        </div>
     </div>
 </body>
 </html>

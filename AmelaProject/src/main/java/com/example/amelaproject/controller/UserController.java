@@ -3,15 +3,13 @@ package com.example.amelaproject.controller;
 import com.example.amelaproject.entity.UserEntity;
 import com.example.amelaproject.service.impl.UserImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.xml.bind.SchemaOutputResolver;
 
 @Controller
 public class UserController {
@@ -26,26 +24,29 @@ public class UserController {
     }
 
     @PostMapping("/save_signup")
-    public String addUsers(@Valid @ModelAttribute("user") UserEntity user,BindingResult result) {
-        if (result.hasErrors()) {
-            return "signup";
-        }
+    public String addUsers( @ModelAttribute("user") UserEntity user) {
+
+        BCryptPasswordEncoder passwordEncoder =  new BCryptPasswordEncoder();
+        String enCode = passwordEncoder.encode(user.getPassword());
+        user.setPassword(enCode);
         userimpl.AddUser(user);
         return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String showLogin() {
+
         return "login";
     }
 
-    @PostMapping("/login")
-    public String check(@ModelAttribute UserEntity user) {
-        if (userimpl.check(user) == true) {
-            return "redirect:/tasklist/page";
-        }
-        return "redirect:/login";
-    }
+//    @PostMapping("/login")
+//    public String check(Model model, @ModelAttribute UserEntity user) {
+//        if (userimpl.check(user) == true) {
+//            return "redirect:/tasklist";
+//
+//        }
+////        return pagination(model, 1);
+//
 
 //    @InitBinder
 //    public void initBinder(WebDataBinder binder) {
