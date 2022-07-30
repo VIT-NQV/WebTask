@@ -18,14 +18,16 @@ public class TaskListImpl implements TaskListService {
     private TaskListRepository taskList;
 
     @Override
-    public List<TaskListEntity> findAll() {
-        List<TaskListEntity> listTask = (List<TaskListEntity> ) taskList.findAll();
-        return listTask;
+    public Page<TaskListEntity> findAll(int page , String searchValue, String status) {
+        Pageable pageable = PageRequest.of(page - 1, 5   );
+        return taskList.getAllTask(pageable , searchValue, status);
     }
 
-    @Override
-    public Page<TaskListEntity> findAll(int page ) {
-        Pageable pageable = PageRequest.of(page - 1, 5   );
-        return taskList.findAll(pageable);
-    }
+
+    //    @Override
+//    public Page<TaskListEntity> findByNameTask(String task, Pageable pageable) {
+//        return taskList.findByNameTask(task, pageable);
+//    }
+
+
 }

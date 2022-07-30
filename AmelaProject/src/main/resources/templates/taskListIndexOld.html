@@ -28,43 +28,40 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center">Task List</h1>
+        <form th:action="@{/search}" class="form" method="get">
+            <h1 style="text-align: center">Task List</h1>
+            <div class="row align-items-start">
+                <div class="col">
+                    <a href="#" class="btn btn-secondary">Export CSV</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-primary">Tạo mới</a>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="search" name="search" th:value="${searchValue}" placeholder="Tìm kiếm">
+                    <button class="btn btn-secondary" type="submit">Tìm kiếm</button>
+                </div>
+                <div class="col">
+                    <select  class="custom-select"  name="status" id="status">
+                        <option th:selected="${status == null}" value="">All</option>
+                        <option th:selected="${status == 'Open'}" value="Open" >Open</option>
+                        <option th:selected="${status == 'Inprogress'}" value="Inprogress">Inprogress</option>
+                        <option th:selected="${status == 'Done'}" value="Done">Done</option>
+                    </select>
+                </div>
+            </div>
+    </form>
 
-        <div class="row align-items-start">
-            <div class="col">
-                <a href="#" class="btn btn-secondary">Export CSV</a>
-            </div>
-            <div class="col">
-                <a href="#" class="btn btn-primary">Tạo mới</a>
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" id="input1" placeholder="Tìm kiếm">
-            </div>
-            <div class="col">
-                <a href="#" class="btn btn-primary">Tìm kiếm</a>
-            </div>
-            <div class="col">
-                <select class="custom-select" aria-label="Default select example">
-                    <option selected>Open</option>
-                    <option value="1">Inprogress</option>
-                    <option value="2">Done</option>
-                    <option value="3">All</option>
-                </select>
-            </div>
-        </div>
-
-        <br>
-
-        <table class="table">
-            <thead>
+    <table class="table">
+                <thead>
                 <tr class="text-center">
                     <th  scope="col">ID</th>
                     <th scope="col">Tiêu đề</th>
                     <th scope="col">Trạng thái</th>
                     <th scope="col">Action</th>
                 </tr>
-            </thead>
-            <tbody th:each="listtask : ${show}">
+                </thead>
+                <tbody th:each="listtask : ${show}">
                 <tr class="text-center">
                     <th scope="row" th:text="${listtask.listID}"></th>
                     <td th:text="${listtask.title}"></td>
@@ -75,20 +72,21 @@
                         <a href="#" class="btn btn-danger">Xoá</a>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        <hr>
+            <hr>
 
-        <div class="example">
-            <nav aria-label="Page navigation">
+            <div class="example" th:if="${totalPages >=1}">
+                <nav aria-label="Page navigation">
                 <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                    <a class="btn btn-secondary pageBtn" th:if="${currentPage != i}" th:href="@{'/tasklist/page/' + ${i}}">[[${i}]]</a>
+                    <a class="btn btn-secondary pageBtn" th:if="${currentPage != i}" th:href="@{'/tasklist/page/' + ${i} +'?search='+ ${searchValue} +'&status='+ ${status}} ">[[${i}]]</a>
                     <span class="btn btn-primary pageBtn" th:unless="${currentPage != i}">[[${i}]]</span>
                 </span>
-            </nav>
+                </nav>
+            </div>
         </div>
-    </div>
+
 
 </body>
 </html>

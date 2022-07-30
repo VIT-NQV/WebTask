@@ -7,42 +7,41 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <div id="wrapper">
-        <h1>Task List</h1>
+    <form th:action="@{/search}" id="form" method="get">
+        <div id="wrapper">
+            <h1>Task List</h1>
 
-        <div class="row align-items-start">
-            <div class="col">
-                <a href="#" class="btn btn-secondary">Export CSV</a>
+            <div class="row align-items-start">
+                <div class="col">
+                    <a href="#" class="btn btn-secondary">Export CSV</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-primary">Tạo mới</a>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="searchInput" name="searchInput" placeholder="Tìm kiếm">
+                    <button class="btn btn-secondary" type="submit">Tìm kiếm</button>
+                </div>
+                <div class="col">
+                    <select class="custom-select" aria-label="Default select example">
+                        <option selected>Open</option>
+                        <option value="1">Inprogress</option>
+                        <option value="2">Done</option>
+                        <option value="3">All</option>
+                    </select>
+                </div>
             </div>
-            <div class="col">
-                <a href="#" class="btn btn-primary">Tạo mới</a>
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" id="input1" placeholder="Tìm kiếm">
-            </div>
-            <div class="col">
-                <a href="#" class="btn btn-primary">Tìm kiếm</a>
-            </div>
-            <div class="col">
-                <select class="custom-select" aria-label="Default select example">
-                    <option selected>Open</option>
-                    <option value="1">Inprogress</option>
-                    <option value="2">Done</option>
-                    <option value="3">All</option>
-                </select>
-            </div>
-        </div>
 
-        <table id="keywords" cellspacing="0" cellpadding="0">
-            <thead>
+            <table id="keywords" cellspacing="0" cellpadding="0">
+                <thead>
                 <tr>
                     <th><span>ID</span></th>
                     <th><span>Tiêu đề</span></th>
                     <th><span>Trạng thái</span></th>
                     <th><span>Action</span></th>
                 </tr>
-            </thead>
-            <tbody th:each="listtask : ${show}">
+                </thead>
+                <tbody th:each="listtask : ${show}">
                 <tr>
                     <th class="lalign" th:text="${listtask.listID}">silly tshirts</th>
                     <td th:text="${listtask.title}"></td>
@@ -53,16 +52,18 @@
                         <a href="#" class="btn btn-danger">Xoá</a>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-        <div class="example">
-            <nav aria-label="Page navigation">
+                </tbody>
+            </table>
+            <div class="example">
+                <nav aria-label="Page navigation">
                 <span th:each="i: ${#numbers.sequence(1, totalPages)}">
                     <a class="btn btn-secondary pageBtn" th:if="${currentPage != i}" th:href="@{'/tasklist/page/' + ${i}}">[[${i}]]</a>
                     <span class="btn btn-primary pageBtn" th:unless="${currentPage != i}">[[${i}]]</span>
                 </span>
-            </nav>
+                </nav>
+            </div>
         </div>
-    </div>
+    </form>
+
 </body>
 </html>
